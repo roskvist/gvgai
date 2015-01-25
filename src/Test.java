@@ -24,12 +24,12 @@ public class Test
         String gamesPath = "examples/gridphysics/";
 
         //CIG 2014 Training Set Games
-        //String games[] = new String[]{"aliens", "boulderdash", "butterflies", "chase", "frogs",
-        //        "missilecommand", "portals", "sokoban", "survivezombies", "zelda"};
+        String games[] = new String[]{"aliens", "boulderdash", "butterflies", "chase", "frogs",
+               "missilecommand", "portals", "sokoban", "survivezombies", "zelda"};
 
         //CIG 2014 Validation Set Games
-        String games[] = new String[]{"camelRace", "digdug", "firestorms", "infection", "firecaster",
-                "overload", "pacman", "seaquest", "whackamole", "eggomania"};
+        // games[] = new String[]{"camelRace", "digdug", "firestorms", "infection", "firecaster",
+               // "overload", "pacman", "seaquest", "whackamole", "eggomania"};
 
 
         //Other settings
@@ -38,13 +38,27 @@ public class Test
         int seed = new Random().nextInt();
 
         //Game and level to play
+
+
+        for(int i =0 ;i<games.length;i++){
+            int gameIdx = i;
+            for(int k = 0;k<4;k++){
+                int levelIdx = k; //level names from 0 to 4 (game_lvlN.txt).
+                String game = gamesPath + games[gameIdx] + ".txt";
+                String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
+
+                // 1. This starts a game, in a level, played by a human.
+                ArcadeMachine.runOneGame(game, level1, visuals, sampleMCTSController, recordActionsFile, seed);
+            }
+        }
+
         int gameIdx = 0;
         int levelIdx = 0; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
 
         // 1. This starts a game, in a level, played by a human.
-        ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
+        //ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
 
         // 2. This plays a game in a level by the controller.
         //ArcadeMachine.runOneGame(game, level1, visuals, sampleMCTSController, recordActionsFile, seed);
@@ -54,9 +68,9 @@ public class Test
         //ArcadeMachine.replayGame(game, level1, visuals, readActionsFile);
 
         // 4. This plays a single game, in N levels, M times :
-        //String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
+       // String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
         //int M = 3;
-        //ArcadeMachine.runGames(game, new String[]{level1, level2}, M, sampleRandomController, null, seed);
+        //ArcadeMachine.runGames(game, new String[]{level1, level2}, M, sampleMCTSController, null, seed);
 
         //5. This plays N games, in the first L levels, M times each. Actions to file optional (set saveActions to true).
         /*int N = 10, L = 5, M = 2;
